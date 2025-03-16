@@ -5,8 +5,8 @@ export default function TimerChallange({ title, targetTime }) {
   const timer = useRef();
   const dialog = useRef();
   
-  const [timeRemainig, setTimeRemanining]=useState(targetTime*1000);
-  const isTimerActive = timeRemainig > 0 && timeRemainig <= targetTime * 1000;
+  const [timeRemainig, setTimeRemanining] = useState(targetTime*1000);
+  const isTimerActive = timeRemainig > 0 && timeRemainig < targetTime * 1000;
 
   if(timeRemainig <= 0) {
      clearInterval(timer.current);
@@ -18,13 +18,11 @@ export default function TimerChallange({ title, targetTime }) {
   }
 
   function handleStart() {
-
    timer.current = setInterval(() => {
-
     setTimeRemanining (prevTimeRemaining => prevTimeRemaining - 10);
-      
     }, 10);
   }
+
   function handleStop() {
     dialog.current.open();
     clearInterval(timer.current); 
